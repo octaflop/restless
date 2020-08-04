@@ -5,6 +5,9 @@ class NameMixin(models.Model):
     """Because I don't want to write the same thing over and over"""
     name = models.CharField(max_length=255)
 
+    class Meta:
+        abstract = True
+
     def __str__(self):
         return f"{self.__repr__} {self.name}"
 
@@ -16,7 +19,8 @@ class CampHost(NameMixin):
 
 class Camper(NameMixin):
     """Someone staying at a campsite"""
-    campsite = models.ForeignKey('campgrounds.Campsite', on_delete=models.CASCADE)
+    campsite = models.ForeignKey('campgrounds.Campsite', on_delete=models.CASCADE,
+                                 related_name='campers')
 
     def __str__(self):
         ret = super(Camper).__str__()
@@ -25,12 +29,18 @@ class Camper(NameMixin):
 
 class Campsite(NameMixin):
     """A reservable / occupy-able location on a camp ground"""
+    tent_only = models.BooleanField(default=True)
     location = models.CharField(max_length=255)
-    campground = models.ForeignKey('campgrounds.Campground', on_delete=models.CASCADE)
+    campground = models.ForeignKey('campgrounds.Campground', on_delete=models.CASCADE,
+                                   related_name='campsites')
 
     def __str__(self):
         ret = super(Camper).__str__()
         return f"{ret} a campsite at {self.campground.name}"
+
+    @property
+    def hosts(self):
+        return self.campground.camphost_set.all()
 
 
 class Campground(NameMixin):
