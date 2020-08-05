@@ -108,3 +108,4 @@ venv.bak/
 
 # editors
 .idea/
+pythonenv3.8/

@@ -3,7 +3,11 @@
 [![Build Status](https://travis-ci.org/octaflop/restless.svg?branch=master)](https://travis-ci.org/octaflop/restless)
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
 
-an exploration of ☁️ and 🐴. Check out the project's [documentation](http://octaflop.github.io/restless/).
+an exploration of ☁️ and 🐴. 
+
+Check out the [Tutorial](tutorial.md)
+
+<!-- TODO Check out the project's [documentation](http://octaflop.github.io/restless/). -->
 
 # Prerequisites
 
