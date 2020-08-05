@@ -1,5 +1,7 @@
 # Insomnia: Losing Sleep Over REST
 
+* smile :smile: 
+
 0. Install prereqs
 	1. [Docker Engine](https://docs.docker.com/engine/install/)
 		* [Docker Compose](https://docs.docker.com/compose/install/)

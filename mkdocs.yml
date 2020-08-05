@@ -5,6 +5,9 @@ site_dir: site
 copyright: Copyright &copy; 2020, <a href="https://github.com/octaflop">octaflop</a>.
 dev_addr: 0.0.0.0:8001
 
+markdown_extensions:
+  - footnotes
+
 nav:
   - Home: 'index.md'
   - Tutorial: 'tutorial.md'
