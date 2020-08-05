@@ -6,7 +6,7 @@ from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 
-from .campgrounds.views import CamperViewSet, CampsiteViewSet
+from .campgrounds.views import CamperViewSet, CampsiteViewSet, CampgroundViewSet, CampHostViewSet
 from .users.views import UserViewSet, UserCreateViewSet
 
 router = DefaultRouter()
@@ -14,6 +14,8 @@ router.register(r'users', UserViewSet)
 router.register(r'users', UserCreateViewSet)
 router.register(r'campers', CamperViewSet)
 router.register(r'campsites', CampsiteViewSet)
+router.register(r'camphosts', CampHostViewSet)
+router.register(r'campgrounds', CampgroundViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

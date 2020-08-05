@@ -28,9 +28,10 @@ class Camper(NameMixin):
 
 
 class Campsite(NameMixin):
-    """A reservable / occupy-able location on a camp ground"""
+    """A reservable / occupy-able location on a campground"""
     tent_only = models.BooleanField(default=True)
     location = models.CharField(max_length=255)
+
     campground = models.ForeignKey('campgrounds.Campground', on_delete=models.CASCADE,
                                    related_name='campsites')
 
