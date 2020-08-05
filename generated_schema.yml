@@ -130,6 +130,460 @@ paths:
                     type: string
                     maxLength: 150
           description: ''
+  /api/v1/campers/:
+    get:
+      operationId: listCampers
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name:
+                          type: string
+                          maxLength: 255
+                      required:
+                      - name
+          description: ''
+    post:
+      operationId: createCamper
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id003
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+              required:
+              - name
+          application/x-www-form-urlencoded:
+            schema: *id003
+          multipart/form-data:
+            schema: *id003
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 255
+                required:
+                - name
+          description: ''
+  /api/v1/campers/{id}/:
+    get:
+      operationId: retrieveCamper
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this camper.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 255
+                required:
+                - name
+          description: ''
+    put:
+      operationId: updateCamper
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this camper.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id004
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+              required:
+              - name
+          application/x-www-form-urlencoded:
+            schema: *id004
+          multipart/form-data:
+            schema: *id004
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 255
+                required:
+                - name
+          description: ''
+    patch:
+      operationId: partial_updateCamper
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this camper.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id005
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+          application/x-www-form-urlencoded:
+            schema: *id005
+          multipart/form-data:
+            schema: *id005
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 255
+                required:
+                - name
+          description: ''
+    delete:
+      operationId: destroyCamper
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this camper.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /api/v1/campsites/:
+    get:
+      operationId: listCampsites
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name:
+                          type: string
+                          maxLength: 255
+                        tent_only:
+                          type: boolean
+                        campground:
+                          type: integer
+                        campers:
+                          type: array
+                          items:
+                            type: integer
+                      required:
+                      - name
+                      - campground
+                      - campers
+          description: ''
+    post:
+      operationId: createCampsite
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id006
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+                tent_only:
+                  type: boolean
+                campground:
+                  type: integer
+                campers:
+                  type: array
+                  items:
+                    type: integer
+              required:
+              - name
+              - campground
+              - campers
+          application/x-www-form-urlencoded:
+            schema: *id006
+          multipart/form-data:
+            schema: *id006
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 255
+                  tent_only:
+                    type: boolean
+                  campground:
+                    type: integer
+                  campers:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - name
+                - campground
+                - campers
+          description: ''
+  /api/v1/campsites/{id}/:
+    get:
+      operationId: retrieveCampsite
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this campsite.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 255
+                  tent_only:
+                    type: boolean
+                  campground:
+                    type: integer
+                  campers:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - name
+                - campground
+                - campers
+          description: ''
+    put:
+      operationId: updateCampsite
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this campsite.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id007
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+                tent_only:
+                  type: boolean
+                campground:
+                  type: integer
+                campers:
+                  type: array
+                  items:
+                    type: integer
+              required:
+              - name
+              - campground
+              - campers
+          application/x-www-form-urlencoded:
+            schema: *id007
+          multipart/form-data:
+            schema: *id007
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 255
+                  tent_only:
+                    type: boolean
+                  campground:
+                    type: integer
+                  campers:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - name
+                - campground
+                - campers
+          description: ''
+    patch:
+      operationId: partial_updateCampsite
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this campsite.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id008
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+                tent_only:
+                  type: boolean
+                campground:
+                  type: integer
+                campers:
+                  type: array
+                  items:
+                    type: integer
+          application/x-www-form-urlencoded:
+            schema: *id008
+          multipart/form-data:
+            schema: *id008
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 255
+                  tent_only:
+                    type: boolean
+                  campground:
+                    type: integer
+                  campers:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - name
+                - campground
+                - campers
+          description: ''
+    delete:
+      operationId: destroyCampsite
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this campsite.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
   /api/v1/users/:
     post:
       operationId: createUser
@@ -138,7 +592,7 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: &id003
+            schema: &id009
               properties:
                 username:
                   type: string
@@ -164,9 +618,9 @@ paths:
               - username
               - password
           application/x-www-form-urlencoded:
-            schema: *id003
+            schema: *id009
           multipart/form-data:
-            schema: *id003
+            schema: *id009
       responses:
         '200':
           content:
