@@ -6,7 +6,7 @@ class CamperSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Camper
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'campsite')
 
 
 class CampsiteSerializer(serializers.ModelSerializer):
@@ -15,6 +15,7 @@ class CampsiteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campsite
         fields = ('id', 'name', 'tent_only', 'campground', 'campers', 'location')
+        depth = 1
 
 
 class CampgroundSerializer(serializers.ModelSerializer):
@@ -23,8 +24,7 @@ class CampgroundSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campground
         fields = ('id', 'name', 'campsites')
-        depth = 10
-
+        depth = 2
 
 class CampHostSerializer(serializers.ModelSerializer):
     campgrounds = CampgroundSerializer
